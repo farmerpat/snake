@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * in hindsight, it seems that making SnakeHead a child of Player may
+ * not have been the best move. Player havinga public GameObject member
+ * whose value was SnakeHead probalby makes more sense.
+ * consider refactoring
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -91,6 +97,10 @@ public class MyPlayerController : MonoBehaviour {
 		// SEE IF ITS DISABLED, AND TO ENABLE IT IF SO
 
 		GameObject cell = (GameObject)Instantiate (BodyCell);
+
+		// disable it first so that it doesn't show up in the middle of the viewport
+		cell.SetActive (false);
+
 		body.Add (cell);
 	}
 
@@ -117,11 +127,6 @@ public class MyPlayerController : MonoBehaviour {
 
 		}
 
-		// for now, randomly spawn a body part
-		//if (Random.Range (0, 2) == 0) {
-		//	this.SpawnBodyPart ();
-		//}
-
 		// see if the head is going to collide with anything (use RayCast ?)
 		// a la RogueLike tut MovingObject script...
 		// boxCollider.enabled = false;
@@ -139,8 +144,15 @@ public class MyPlayerController : MonoBehaviour {
 		for (int i = 0; i < body.Count; i++) {
 			// try disabling the hit boxes
 			// ... but what about the head colliding w/ body 
+
 			tempPos = body[i].transform.position;
 			body[i].transform.position = nextPos;
+
+			// see if its disabled and enable it if so (e.g. a new body part)
+			if (!body [i].activeSelf) {
+				body[i].SetActive (true);
+			}
+
 			//body [i].GetComponent<BoxCollider2D> ().enabled = false;
 			nextPos = tempPos;
 
@@ -154,7 +166,18 @@ public class MyPlayerController : MonoBehaviour {
 	}
 
 	public void OnChildTriggerEnter2D (Collider2D child, Collider2D other) {
-		Debug.Log ("a child has triggered");
+		if (other.CompareTag ("Food")) {
+			Debug.Log ("i hit food");
+			Destroy (other.gameObject);
+			this.SpawnBodyPart ();
 
+		} else if (other.CompareTag ("Player")) {
+			Debug.Log ("i hit myself. rip");
+
+		} else if (other.CompareTag ("Wall")) {
+			// these dont exist yet so...
+			Debug.Log ("i hit the wall");
+
+		}
 	}
 }

@@ -45,7 +45,23 @@ public class GameManager : MonoBehaviour {
 		int xMul = Random.Range(-4, 5);
 		int yMul = Random.Range (-2, 3);
 
+		Debug.Log ("xMul:");
+		Debug.Log (xMul);
+		Debug.Log ("yMul:");
+		Debug.Log (yMul);
+		Debug.Log ("bounds:");
+		SpriteRenderer sr = foodPellet.GetComponent<SpriteRenderer> ();
+		Debug.Log (sr.sprite.bounds);
+		Debug.Log ("rect:");
+		Debug.Log (sr.sprite.rect);
+
 		return new Vector3 (xMul * .53f, yMul * .53f, 0.0f);
+		// x has 1.4 irl
+		// x needs either
+		// 1.73 (+ .33)
+		// or
+		// 1.173 (- .23)
+		// wtf
 
 		// make sure its in bounds and is not in the snake!
 	}
