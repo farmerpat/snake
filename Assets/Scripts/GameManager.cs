@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
 		Debug.Log ("rect:");
 		Debug.Log (sr.sprite.rect);
 
-		return new Vector3 (xMul * .53f, yMul * .53f, 0.0f);
+		return new Vector3 (xMul * .55f, yMul * .55f, 0.0f);
 		// x has 1.4 irl
 		// x needs either
 		// 1.73 (+ .33)
