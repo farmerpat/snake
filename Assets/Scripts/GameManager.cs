@@ -5,11 +5,10 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
 	private GameObject foodPellet;
+	private AudioSource audioSource;
 
-	// snake cells' pixels per unit is 100
-	// sprites hxw = 53x53
-	// so, the width of the sprite is 53/100 = .53
 	void Start () {
+		audioSource = GetComponent<AudioSource> ();
 		foodPellet = (GameObject)Instantiate(Resources.Load("FoodPellet"));	
 		foodPellet.transform.position = this.GetPelletPos ();
 
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour {
 			foodPellet = (GameObject)Instantiate(Resources.Load("FoodPellet"));	
 			foodPellet.transform.position = this.GetPelletPos ();
 			// play drop_food
+			audioSource.Play ();
 
 		}
 	}

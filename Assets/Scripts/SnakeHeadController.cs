@@ -7,7 +7,6 @@ public class SnakeHeadController : MonoBehaviour {
 
 	void Start () {
 		parentScript = transform.parent.gameObject.GetComponent<MyPlayerController> ();
-		Debug.Log (parentScript);
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {

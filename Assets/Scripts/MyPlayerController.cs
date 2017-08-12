@@ -13,12 +13,14 @@ public class MyPlayerController : MonoBehaviour {
 	private GameObject head;
 	public GameObject BodyCellPool;
 	public GameObject BodyCell;
+	public int moveDelay = 5;
+
 	private float bodyUnit;
 	// number of frames between movement
-	public int moveDelay = 5;
 	private int frameCycle = 0;
 	private string direction;
 	private List<GameObject> body;
+	private AudioSource audioSource;
 
 	private bool addCell = false;
 
@@ -27,6 +29,7 @@ public class MyPlayerController : MonoBehaviour {
 		bodyUnit = .55f;
 		head = GameObject.Find ("SnakeHead");
 		body = new List<GameObject> ();
+		audioSource = GetComponent<AudioSource> ();
 
 		// randomly select starting direction
 		int r = Random.Range(0, 4);
@@ -162,7 +165,6 @@ public class MyPlayerController : MonoBehaviour {
 
 	public void OnChildTriggerEnter2D (Collider2D child, Collider2D other) {
 		if (other.CompareTag ("Food")) {
-			// play the eat sound
 			Destroy (other.gameObject);
 			this.SpawnBodyPart ();
 
@@ -170,6 +172,9 @@ public class MyPlayerController : MonoBehaviour {
 			// if there are still board spaces available, game over
 			// if there aren't spaces available, win game
 			// play appropriate sounds
+
+			// play death sound
+			audioSource.Play();
 			Debug.Log ("i hit myself. rip");
 
 		} else if (other.CompareTag ("Wall")) {
