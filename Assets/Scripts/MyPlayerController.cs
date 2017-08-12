@@ -14,7 +14,10 @@ public class MyPlayerController : MonoBehaviour {
 	public GameObject BodyCellPool;
 	public GameObject BodyCell;
 	public int moveDelay = 5;
+	public float deadZoneSize = .1f;
 
+	private float negativeInputTolerance;
+	private float positiveInputTolerance;
 	private float bodyUnit;
 	// number of frames between movement
 	private int frameCycle = 0;
@@ -25,6 +28,8 @@ public class MyPlayerController : MonoBehaviour {
 	private bool addCell = false;
 
 	void Start () {
+		positiveInputTolerance = deadZoneSize;
+		negativeInputTolerance = deadZoneSize * -1;
 		// calculate this based on the head hitbox, you fool!
 		bodyUnit = .55f;
 		head = GameObject.Find ("SnakeHead");
@@ -56,16 +61,16 @@ public class MyPlayerController : MonoBehaviour {
 	void Update () {
 		frameCycle++;
 
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+		if (Input.GetKeyDown (KeyCode.UpArrow) || (Input.GetAxis("Vertical") > positiveInputTolerance)) {
 			direction = "up";
 
-		} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+		} else if (Input.GetKeyDown (KeyCode.DownArrow) || (Input.GetAxis("Vertical") < negativeInputTolerance)) {
 			direction = "down";
 
-		} else if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+		} else if (Input.GetKeyDown (KeyCode.LeftArrow) || (Input.GetAxis("Horizontal") < negativeInputTolerance)) {
 			direction = "left";
 
-		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+		} else if (Input.GetKeyDown (KeyCode.RightArrow) || (Input.GetAxis("Horizontal") > positiveInputTolerance)) {
 			direction = "right";
 
 		}

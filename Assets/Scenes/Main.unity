@@ -140,7 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BodyCellPool: {fileID: 0}
   BodyCell: {fileID: 1716737755983386, guid: daca2824d3072464381142f1399bb75f, type: 2}
-  moveDelay: 7
+  moveDelay: 20
+  inputTolerance: 0.1
 --- !u!4 &417222312
 Transform:
   m_ObjectHideFlags: 0
