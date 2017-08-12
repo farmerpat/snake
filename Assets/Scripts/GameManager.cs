@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 		if (foodPellet == null) {
 			foodPellet = (GameObject)Instantiate(Resources.Load("FoodPellet"));	
 			foodPellet.transform.position = this.GetPelletPos ();
-			// place it in the grid somewhere not in the snake
+			// play drop_food
 
 		}
 	}

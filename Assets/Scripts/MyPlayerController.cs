@@ -82,8 +82,6 @@ public class MyPlayerController : MonoBehaviour {
 			}
 
 			this.AdvanceBody ();
-			//Debug.Log (this.head.transform.position);
-
 		}
 	}
 
@@ -92,9 +90,6 @@ public class MyPlayerController : MonoBehaviour {
 		// as an exercise in optimization
 		// and place it at the same location of transform.pos
 		// for now, just instantiate a new one and add it to the body list
-		// ALSO, IT SHOULD BE HIDDEN/DISABLED/WHATEVER THE LINGO IS TO START WITH
-		// THERE SHOULD BE A CHECK IN THE LOOP IN aDVANCEbODY TO
-		// SEE IF ITS DISABLED, AND TO ENABLE IT IF SO
 
 		GameObject cell = (GameObject)Instantiate (BodyCell);
 
@@ -167,11 +162,14 @@ public class MyPlayerController : MonoBehaviour {
 
 	public void OnChildTriggerEnter2D (Collider2D child, Collider2D other) {
 		if (other.CompareTag ("Food")) {
-			Debug.Log ("i hit food");
+			// play the eat sound
 			Destroy (other.gameObject);
 			this.SpawnBodyPart ();
 
 		} else if (other.CompareTag ("Player")) {
+			// if there are still board spaces available, game over
+			// if there aren't spaces available, win game
+			// play appropriate sounds
 			Debug.Log ("i hit myself. rip");
 
 		} else if (other.CompareTag ("Wall")) {
