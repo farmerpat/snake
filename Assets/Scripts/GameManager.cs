@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
 		foodPellet.transform.position = this.GetPelletPos ();
 
 	}
-	
+
 	void Update () {
 		if (foodPellet == null) {
 			foodPellet = (GameObject)Instantiate(Resources.Load("FoodPellet"));	
@@ -43,6 +43,14 @@ public class GameManager : MonoBehaviour {
 		// a copy of the game board. e.g. it would show the places
 		// where the snake already is
 
+		// x min is -2.2
+		// x min edge is -2.2 - halfLength = (-2.2 - .275) = -2.475
+		// x max is 2.2
+		// x max edge is 2.2 + halfLength = (2.2 + .275) = 2.475
+		// y min is -1.1
+		// y min edge is -1.1 - halfWidth = (-1.1 - .275) = -1.375
+		// y max is 1.1
+		// y max edge is 1.1 + halfWidth = (1.1 + .275) = 1.375
 		int xMul = Random.Range(-4, 5);
 		int yMul = Random.Range (-2, 3);
 		Vector2 tryFirstCorner = new Vector2 ();
