@@ -278,7 +278,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
       propertyPath: m_Name
-      value: FoodPellet (3)
+      value: BottomLeftBoundry
       objectReference: {fileID: 0}
     - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
       propertyPath: m_IsActive
@@ -420,7 +420,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
       propertyPath: m_Name
-      value: FoodPellet (1)
+      value: BottomRightBoundry
       objectReference: {fileID: 0}
     - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
       propertyPath: m_IsActive
@@ -597,7 +597,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
       propertyPath: m_Name
-      value: FoodPellet (2)
+      value: TopRightBoundry
       objectReference: {fileID: 0}
     - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
       propertyPath: m_IsActive
@@ -810,7 +810,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488613013859460, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
+      propertyPath: m_Name
+      value: TopLeftBoundry
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be69f83f9cce44e1d9f8ac404a1b8a84, type: 2}
