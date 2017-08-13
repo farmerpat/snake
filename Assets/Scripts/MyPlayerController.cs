@@ -25,6 +25,7 @@ public class MyPlayerController : MonoBehaviour {
 	private string direction;
 	private List<GameObject> body;
 	private AudioSource audioSource;
+	private ParticleSystem headExploder;
 
 	private bool addCell = false;
 
@@ -35,6 +36,7 @@ public class MyPlayerController : MonoBehaviour {
 		// calculate this based on the head hitbox, you fool!
 		bodyUnit = .55f;
 		head = GameObject.Find ("SnakeHead");
+		headExploder = head.GetComponent<ParticleSystem> ();
 		body = new List<GameObject> ();
 		audioSource = GetComponent<AudioSource> ();
 
@@ -208,6 +210,8 @@ public class MyPlayerController : MonoBehaviour {
 
 			// play death sound
 			audioSource.Play();
+			// fire particles
+			headExploder.Emit(20);
 			Debug.Log ("i hit myself. rip");
 
 		} else if (other.CompareTag ("Wall")) {
