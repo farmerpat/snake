@@ -16,7 +16,7 @@ public class MyPlayerController : MonoBehaviour {
 	public int moveDelay = 5;
 	public float deadZoneSize = .1f;
 
-	private bool moveAllowed;
+	private string lastDirection;
 	private float negativeInputTolerance;
 	private float positiveInputTolerance;
 	private float bodyUnit;
@@ -30,7 +30,6 @@ public class MyPlayerController : MonoBehaviour {
 	private bool addCell = false;
 
 	void Start () {
-		moveAllowed = true;
 		positiveInputTolerance = deadZoneSize;
 		negativeInputTolerance = deadZoneSize * -1;
 		// calculate this based on the head hitbox, you fool!
@@ -65,53 +64,42 @@ public class MyPlayerController : MonoBehaviour {
 	void Update () {
 		frameCycle++;
 
-		if (moveAllowed) {
-			if (Input.GetKeyDown (KeyCode.UpArrow) || (Input.GetAxis("Vertical") > positiveInputTolerance)) {
-				// this check makes things better, but it isn't a complete fix.
-				// we are still able to immediately reverse direction
-				// when the last direction is not a match, but that
-				// movement has not been carried out yet (e.g. we
-				// change direction in the middle of the frame delay
-				// to a valid direction (here, say right), and then
-				// change back to the one that is supposed to be
-				// invalid (e.g. down))
-				// could try a moveAlowed flag that gets
-				// set to true when frameCycle == moveDelay
-				// and is set to false whenever valid input is detected.
-				// that might help
-				if (direction != "down") {
-					direction = "up";
-					moveAllowed = false;
+		if (Input.GetKeyDown (KeyCode.UpArrow) || (Input.GetAxis("Vertical") > positiveInputTolerance)) {
+			// this check makes things better, but it isn't a complete fix.
+			// we are still able to immediately reverse direction
+			// when the last direction is not a match, but that
+			// movement has not been carried out yet (e.g. we
+			// change direction in the middle of the frame delay
+			// to a valid direction (here, say right), and then
+			// change back to the one that is supposed to be
+			// invalid (e.g. down))
+			// could try a moveAlowed flag that gets
+			// set to true when frameCycle == moveDelay
+			// and is set to false whenever valid input is detected.
+			// that might help
+			if (direction != "down" && lastDirection != "down") {
+				direction = "up";
 
-				}
-			} else if (Input.GetKeyDown (KeyCode.DownArrow) || (Input.GetAxis("Vertical") < negativeInputTolerance)) {
-				if (direction != "up") {
-					direction = "down";
-					moveAllowed = false;
+			}
+		} else if (Input.GetKeyDown (KeyCode.DownArrow) || (Input.GetAxis("Vertical") < negativeInputTolerance)) {
+			if (direction != "up" && lastDirection != "up") {
+				direction = "down";
 
-				}
-			} else if (Input.GetKeyDown (KeyCode.LeftArrow) || (Input.GetAxis("Horizontal") < negativeInputTolerance)) {
-				if (direction != "right") {
-					direction = "left";
-					moveAllowed = false;
+			}
+		} else if (Input.GetKeyDown (KeyCode.LeftArrow) || (Input.GetAxis("Horizontal") < negativeInputTolerance)) {
+			if (direction != "right" && lastDirection != "right") {
+				direction = "left";
 
-				}
-			} else if (Input.GetKeyDown (KeyCode.RightArrow) || (Input.GetAxis("Horizontal") > positiveInputTolerance)) {
-				if (direction != "left") {
-					direction = "right";
-					moveAllowed = false;
+			}
+		} else if (Input.GetKeyDown (KeyCode.RightArrow) || (Input.GetAxis("Horizontal") > positiveInputTolerance)) {
+			if (direction != "left" && lastDirection != "left") {
+				direction = "right";
 
-				}
 			}
 		}
 
-//		if (Input.GetKeyDown (KeyCode.Space)) {
-//			addCell = true;
-//		}
-
 		if (frameCycle == moveDelay) {
 			frameCycle = 0;
-			moveAllowed = true;
 
 			if (addCell) {
 				addCell = false;
@@ -140,6 +128,7 @@ public class MyPlayerController : MonoBehaviour {
 	private void AdvanceBody() {
 		Vector3 nextPos = this.head.transform.position;
 		Vector3 tempPos;
+		lastDirection = direction;
 
 		switch (direction) {
 		case "up":
