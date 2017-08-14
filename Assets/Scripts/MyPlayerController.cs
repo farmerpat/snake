@@ -16,6 +16,7 @@ public class MyPlayerController : MonoBehaviour {
 	public int moveDelay = 5;
 	public float deadZoneSize = .1f;
 
+	private bool alive = true;
 	private string lastDirection;
 	private float negativeInputTolerance;
 	private float positiveInputTolerance;
@@ -29,7 +30,11 @@ public class MyPlayerController : MonoBehaviour {
 
 	private bool addCell = false;
 
-	void Start () {
+	public bool isAlive () {
+		return this.alive;
+	}
+
+	private void Start () {
 		positiveInputTolerance = deadZoneSize;
 		negativeInputTolerance = deadZoneSize * -1;
 		// calculate this based on the head hitbox, you fool!
@@ -61,7 +66,7 @@ public class MyPlayerController : MonoBehaviour {
 		body.Add (head);
 	}
 	
-	void Update () {
+	private void Update () {
 		frameCycle++;
 
 		if (Input.GetKeyDown (KeyCode.UpArrow) || (Input.GetAxis("Vertical") > positiveInputTolerance)) {
@@ -101,13 +106,15 @@ public class MyPlayerController : MonoBehaviour {
 		if (frameCycle == moveDelay) {
 			frameCycle = 0;
 
-			if (addCell) {
+			if (this.alive) {
+				if (addCell) {
 				addCell = false;
 				this.SpawnBodyPart ();
 
-			}
+				}
 
-			this.AdvanceBody ();
+				this.AdvanceBody ();
+			}
 		}
 	}
 
@@ -187,6 +194,17 @@ public class MyPlayerController : MonoBehaviour {
 		}
 	}
 
+	private void deathSequence () {
+		// play death sound
+		audioSource.Play();
+
+		// fire particles
+		headExploder.Emit(3);
+
+		this.alive = false;
+
+	}
+
 	public void OnChildTriggerEnter2D (Collider2D child, Collider2D other) {
 		if (other.CompareTag ("Food")) {
 			Destroy (other.gameObject);
@@ -197,15 +215,10 @@ public class MyPlayerController : MonoBehaviour {
 			// if there aren't spaces available, win game
 			// play appropriate sounds
 
-			// play death sound
-			audioSource.Play();
-			// fire particles
-			headExploder.Emit(20);
-			Debug.Log ("i hit myself. rip");
+			this.deathSequence ();
 
 		} else if (other.CompareTag ("Wall")) {
-			// these dont exist yet so...
-			Debug.Log ("i hit the wall");
+			this.deathSequence ();
 
 		}
 	}

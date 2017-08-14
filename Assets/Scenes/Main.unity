@@ -541,12 +541,12 @@ Prefab:
     - target: {fileID: 198563519082333770, guid: 86892e2561dc84dafbeae696b63fdb53,
         type: 2}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.83921576
+      value: 0.58431375
       objectReference: {fileID: 0}
     - target: {fileID: 198563519082333770, guid: 86892e2561dc84dafbeae696b63fdb53,
         type: 2}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.58431375
+      value: 0.7018796
       objectReference: {fileID: 0}
     - target: {fileID: 198563519082333770, guid: 86892e2561dc84dafbeae696b63fdb53,
         type: 2}
@@ -581,6 +581,26 @@ Prefab:
     - target: {fileID: 198563519082333770, guid: 86892e2561dc84dafbeae696b63fdb53,
         type: 2}
       propertyPath: TrailModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199844567413731996, guid: 86892e2561dc84dafbeae696b63fdb53,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -891941685
+      objectReference: {fileID: 0}
+    - target: {fileID: 199844567413731996, guid: 86892e2561dc84dafbeae696b63fdb53,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199844567413731996, guid: 86892e2561dc84dafbeae696b63fdb53,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212796228218396028, guid: 86892e2561dc84dafbeae696b63fdb53,
+        type: 2}
+      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

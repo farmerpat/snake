@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Explosion Layer
+    uniqueID: 3403025611
+    locked: 0
