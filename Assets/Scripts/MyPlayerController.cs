@@ -199,6 +199,11 @@ public class MyPlayerController : MonoBehaviour {
 		audioSource.Play();
 
 		// fire particles
+		// these appear to be forced to the same sorting layer as the
+		// sprite renderer of SnakeHead's child, snake_cell (Default),
+		// even though we are assigning it to a new sorting layer.
+		// that is why we gave it an increased "order in sorting layer"
+		// property
 		headExploder.Emit(3);
 
 		this.alive = false;
